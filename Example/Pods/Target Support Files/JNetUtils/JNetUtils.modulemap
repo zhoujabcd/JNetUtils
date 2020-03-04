@@ -1,0 +1,6 @@
+framework module JNetUtils {
+  umbrella header "JNetUtils-umbrella.h"
+
+  export *
+  module * { export * }
+}

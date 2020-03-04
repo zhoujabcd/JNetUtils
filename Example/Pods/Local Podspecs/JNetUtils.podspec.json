@@ -1,0 +1,22 @@
+{
+  "name": "JNetUtils",
+  "version": "0.1.0",
+  "summary": "A short description of JNetUtils.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Justin/JNetUtils",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Justin": "labinnah1982@hotmail.com"
+  },
+  "source": {
+    "git": "https://github.com/Justin/JNetUtils.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "JNetUtils/Classes/**/*"
+}
