@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "JNetCommon.h"
-#import <AFNetworking.h>
-#import <AFURLRequestSerialization.h>
+#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/AFURLRequestSerialization.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

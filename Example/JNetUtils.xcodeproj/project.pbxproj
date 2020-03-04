@@ -248,6 +248,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Justin;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = 8BJY634RG9;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -521,6 +524,7 @@
 			baseConfigurationReference = A318B5A0FC067471DBF6F11F /* Pods-JNetUtils_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8BJY634RG9;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JNetUtils/JNetUtils-Prefix.pch";
 				INFOPLIST_FILE = "JNetUtils/JNetUtils-Info.plist";
@@ -538,6 +542,7 @@
 			baseConfigurationReference = D25AED16926FEF1F76D72930 /* Pods-JNetUtils_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8BJY634RG9;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JNetUtils/JNetUtils-Prefix.pch";
 				INFOPLIST_FILE = "JNetUtils/JNetUtils-Info.plist";

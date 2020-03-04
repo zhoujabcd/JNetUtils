@@ -1,6 +1,6 @@
 {
   "name": "JNetUtils",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "summary": "A net request tool.",
   "description": "This is a net request tool base on AFNetworking",
   "homepage": "https://github.com/zhoujabcd/JNetUtils",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/zhoujabcd/JNetUtils.git",
-    "tag": "0.2.0"
+    "tag": "0.3.0"
   },
   "platforms": {
     "ios": "10.0"
