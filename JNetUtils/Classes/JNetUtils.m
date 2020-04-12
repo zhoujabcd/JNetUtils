@@ -18,19 +18,6 @@
 
 + (void)initialize
 {
-    if (self == [JNetUtils class]) {
-        jConfig = [[JNetConfiguration alloc]init];
-    }
-}
-
-+(void)updateBaseURL:(NSString *)baseURL
-{
-    jConfig.baseURL = baseURL;
-}
-
-+(void)updateHeader:(NSDictionary *)header
-{
-    jConfig.header = header;
 }
 
 
@@ -47,11 +34,22 @@
         
         _manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:_configuration];
         
-        _methodStr = @"GET";
+        _methodStr = @"POST";
         _urlStr = @"";
-        _requestSerializer = HTTPRequestSerializer;
-        _responseSerializer = HTTPResponseSerializer;
+        
+        _requestSerializer = [JNetConfiguration getRequestSerialization];
+        _responseSerializer = [JNetConfiguration getResponseSerialization];
+        
+        _manager.responseSerializer = [[JNetTool shareInstance] getResponseSerialization:_responseSerializer];
+        
+        if([JNetConfiguration getHeader] != nil)
+        {
+            _header = [JNetConfiguration getHeader];
+        }
+        
+        _manager.securityPolicy = [JNetConfiguration getSecurityPolicy];
     }
+    
     return self;
 }
 
@@ -73,7 +71,7 @@
         _methodStr = @"GET";
     }
     
-    NSLog(@"request method: %@", _methodStr);
+//    NSLog(@"request method: %@", _methodStr);
     
     return self;
 }
@@ -96,6 +94,8 @@
 {
     _responseSerializer = responseSerialization;
     
+    _manager.responseSerializer = [[JNetTool shareInstance] getResponseSerialization:self.responseSerializer];
+    
     return self;
 }
 
@@ -106,14 +106,23 @@
     return self;
 }
 
--(instancetype)updateSecurityPolicy:(AFSecurityPolicy *)securityPolicy
+-(instancetype)updateSecurityPolicy:(JSSLPinningMode)pinningMode cerData:(NSSet * _Nullable)cerData
 {
-    _securityPolicy = securityPolicy;
+    if(cerData != nil)
+    {
+        _securityPolicy = [JSecurityPolicy policyWithPinningMode:pinningMode withPinnedCertificates:cerData];
+    }
+    else
+    {
+        _securityPolicy = [JSecurityPolicy policyWithPinningMode:pinningMode];
+    }
+    
+    _manager.securityPolicy = _securityPolicy;
     
     return self;
 }
 
--(void)requestData:(void(^)(NSProgress * _Nonnull uploadProgress))uploadProgress downloadProgress:(void(^)(NSProgress * _Nonnull downloadProgress))downloadProgress completionHandler:(void (^)(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error))completionHandler
+-(void)requestData:(void(^)(NSProgress  * _Nullable uploadProgress))uploadProgress downloadProgress:(void(^)(NSProgress  * _Nullable downloadProgress))downloadProgress completionHandler:(void (^)(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error))completionHandler
 {
     dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
     
@@ -125,9 +134,9 @@
         
         NSString *url = nil;
         
-        if(jConfig.baseURL != nil)
+        if([JNetConfiguration getBaseURL] != nil)
         {
-            url = [[JNetTool shareInstance]assembleURL:jConfig.baseURL apiURL:sS.urlStr];
+            url = [[JNetTool shareInstance]assembleURL:[JNetConfiguration getBaseURL] apiURL:sS.urlStr];
         }
         else
         {
@@ -135,26 +144,12 @@
         }
         
         NSMutableURLRequest *request = [[[JNetTool shareInstance] getRequestSerialization:sS.requestSerializer]requestWithMethod:sS.methodStr URLString:url parameters:sS.dataDic error:NULL];
-
-        sS.manager.responseSerializer = [[JNetTool shareInstance] getResponseSerialization:sS.responseSerializer];
-        
-        if(jConfig.header != nil)
-        {
-            [jConfig.header enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-                [request addValue:obj forHTTPHeaderField:key];
-            }];
-        }
         
         if(sS.header != nil)
         {
             [sS.header enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                 [request addValue:obj forHTTPHeaderField:key];
             }];
-        }
-        
-        if(sS.securityPolicy != nil)
-        {
-            sS.manager.securityPolicy = sS.securityPolicy;
         }
         
         NSURLSessionDataTask *dataTask = [sS.manager dataTaskWithRequest:request uploadProgress:uploadProgress downloadProgress:downloadProgress completionHandler:completionHandler];

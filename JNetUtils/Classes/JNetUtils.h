@@ -10,6 +10,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "JNetCommon.h"
 #import "JNetConfiguration.h"
+#import "JSecurityPolicy.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,17 +24,13 @@ static JNetConfiguration *jConfig = nil;
 @property(nonatomic, copy)NSString *methodStr;
 @property(nonatomic, copy)NSString *urlStr;
 @property(nonatomic, copy)NSDictionary *header;
-@property(nonatomic, strong)AFSecurityPolicy *securityPolicy;
+@property(nonatomic, strong)JSecurityPolicy *securityPolicy;
 
 @property(nonatomic, assign)JNetRequestSerialization requestSerializer;
 @property(nonatomic, assign)JNetResponseSerialization responseSerializer;
 
 
 +(JNetUtils *)build;
-
-+(void)updateBaseURL:(NSString *)baseURL;
-
-+(void)updateHeader:(NSDictionary *)header;
 
 
 -(instancetype)init;
@@ -50,9 +47,9 @@ static JNetConfiguration *jConfig = nil;
 
 -(instancetype)updateHeader:(NSDictionary *)header;
 
--(instancetype)updateSecurityPolicy:(AFSecurityPolicy *)securityPolicy;
+-(instancetype)updateSecurityPolicy:(JSSLPinningMode)pinningMode cerData:(NSSet  * _Nullable)cerData;
 
--(void)requestData:(void(^)(NSProgress * _Nonnull uploadProgress))uploadProgress downloadProgress:(void(^)(NSProgress * _Nonnull downloadProgress))downloadProgress completionHandler:(void (^)(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error))completionHandler;
+-(void)requestData:( void(^ _Nullable )(NSProgress  * _Nullable uploadProgress))uploadProgress downloadProgress:(void(^ _Nullable )(NSProgress  * _Nullable downloadProgress))downloadProgress completionHandler:(void (^)(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error))completionHandler;
 
 @end
 

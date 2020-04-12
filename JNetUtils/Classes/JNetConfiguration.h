@@ -7,14 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JNetCommon.h"
+#import "JSecurityPolicy.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JNetConfiguration : NSObject
 
-@property(nonatomic, copy)NSString *baseURL;
++(void)updateBaseURL:(NSString *)baseURL;
 
-@property(nonatomic, copy)NSDictionary *header;
++(void)updateHeader:(NSDictionary *)header;
+
++(NSString *)getBaseURL;
+
++(NSDictionary *)getHeader;
+
++(void)updateRequestSerialization:(JNetRequestSerialization)requestSerialization;
++(JNetRequestSerialization)getRequestSerialization;
+
++(void)updateResponseSerialization:(JNetResponseSerialization)responseSerialization;
++(JNetResponseSerialization)getResponseSerialization;
+
++(void)updateSecurityPolicy:(JSecurityPolicy *)securityPolicy;
++(JSecurityPolicy *)getSecurityPolicy;
 
 @end
 

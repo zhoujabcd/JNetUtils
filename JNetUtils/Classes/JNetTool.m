@@ -25,6 +25,24 @@
     return instance;
 }
 
+-(AFSSLPinningMode)getPinningMode:(JSSLPinningMode)pinningMode
+{
+    if(pinningMode == JSSLPinningModeNone)
+    {
+        return AFSSLPinningModeNone;
+    }
+    else if(pinningMode == JSSLPinningModePublicKey)
+    {
+        return AFSSLPinningModePublicKey;
+    }
+    else if(pinningMode == JSSLPinningModeCertificate)
+    {
+        return AFSSLPinningModeCertificate;
+    }
+    
+    return AFSSLPinningModeNone;
+}
+
 
 -(AFHTTPRequestSerializer *)getRequestSerialization:(JNetRequestSerialization)requestSerializer
 {

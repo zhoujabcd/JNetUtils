@@ -10,6 +10,7 @@
 #import "JNetCommon.h"
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/AFURLRequestSerialization.h>
+#import <AFSecurityPolicy.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(AFHTTPResponseSerializer *)getResponseSerialization:(JNetResponseSerialization)responseSerializer;
 
 -(NSString *)assembleURL:(NSString *)baseURL apiURL:(NSString *)apiURL;
+
+-(AFSSLPinningMode)getPinningMode:(JSSLPinningMode)pinningMode;
 
 @end
 

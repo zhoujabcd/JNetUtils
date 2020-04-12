@@ -30,6 +30,12 @@ typedef NS_ENUM(NSInteger, JNetResponseSerialization) {
     CompoundResponseSerializer
 };
 
+typedef NS_ENUM(NSInteger, JSSLPinningMode) {
+    JSSLPinningModeNone,
+    JSSLPinningModeCertificate,
+    JSSLPinningModePublicKey
+};
+
 @interface JNetCommon : NSObject
 
 @end
