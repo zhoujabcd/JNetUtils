@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AFSecurityPolicy.h>
+#import <AFNetworking/AFSecurityPolicy.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -10,7 +10,7 @@
 #import "JNetCommon.h"
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/AFURLRequestSerialization.h>
-#import <AFSecurityPolicy.h>
+#import <AFNetworking/AFSecurityPolicy.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
