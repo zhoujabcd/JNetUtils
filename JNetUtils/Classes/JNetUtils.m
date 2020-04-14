@@ -29,6 +29,7 @@
 - (instancetype)init
 {
     self = [super init];
+    
     if (self) {
         _configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         
@@ -48,6 +49,10 @@
         }
         
         _manager.securityPolicy = [JNetConfiguration getSecurityPolicy];
+        
+        _timeoutInterval = [JNetConfiguration getTimeoutInterval];
+        
+        _cachePolicy = [JNetConfiguration getCachePolicy];
     }
     
     return self;
@@ -106,6 +111,13 @@
     return self;
 }
 
+-(instancetype)updateTimeoutInterval:(float)time
+{
+    _timeoutInterval = time;
+    
+    return self;
+}
+
 -(instancetype)updateSecurityPolicy:(JSSLPinningMode)pinningMode cerData:(NSSet * _Nullable)cerData
 {
     if(cerData != nil)
@@ -118,6 +130,13 @@
     }
     
     _manager.securityPolicy = _securityPolicy;
+    
+    return self;
+}
+
+-(instancetype)updateCachePolicy:(NSURLRequestCachePolicy)cachePolicy
+{
+    _cachePolicy = cachePolicy;
     
     return self;
 }
@@ -144,6 +163,9 @@
         }
         
         NSMutableURLRequest *request = [[[JNetTool shareInstance] getRequestSerialization:sS.requestSerializer]requestWithMethod:sS.methodStr URLString:url parameters:sS.dataDic error:NULL];
+        
+        request.timeoutInterval = sS.timeoutInterval;
+        request.cachePolicy = sS.cachePolicy;
         
         if(sS.header != nil)
         {

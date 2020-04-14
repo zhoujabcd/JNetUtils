@@ -29,6 +29,9 @@ static JNetConfiguration *jConfig = nil;
 @property(nonatomic, assign)JNetRequestSerialization requestSerializer;
 @property(nonatomic, assign)JNetResponseSerialization responseSerializer;
 
+@property(nonatomic, assign)float timeoutInterval;
+@property(nonatomic, assign)NSURLRequestCachePolicy cachePolicy;
+
 
 +(JNetUtils *)build;
 
@@ -48,6 +51,8 @@ static JNetConfiguration *jConfig = nil;
 -(instancetype)updateHeader:(NSDictionary *)header;
 
 -(instancetype)updateSecurityPolicy:(JSSLPinningMode)pinningMode cerData:(NSSet  * _Nullable)cerData;
+
+-(instancetype)updateTimeoutInterval:(float)time;
 
 -(void)requestData:( void(^ _Nullable )(NSProgress  * _Nullable uploadProgress))uploadProgress downloadProgress:(void(^ _Nullable )(NSProgress  * _Nullable downloadProgress))downloadProgress completionHandler:(void (^)(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error))completionHandler;
 

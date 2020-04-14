@@ -31,6 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 +(void)updateSecurityPolicy:(JSecurityPolicy *)securityPolicy;
 +(JSecurityPolicy *)getSecurityPolicy;
 
++(void)updateTimeoutInterval:(float)timeoutInterval;
++(float)getTimeoutInterval;
+
++(void)updateCachePolicy:(NSURLRequestCachePolicy)cachePolicy;
++(NSURLRequestCachePolicy)getCachePolicy;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -16,6 +16,9 @@ JNetRequestSerialization _requestSerializer;
 JNetResponseSerialization _responseSerializer;
 
 JSecurityPolicy *_securityPolicy;
+NSURLRequestCachePolicy _cachePolicy;
+
+float _timeoutInterval;
 
 @implementation JNetConfiguration
 
@@ -26,7 +29,21 @@ JSecurityPolicy *_securityPolicy;
         _responseSerializer = JSONResponseSerializer;
         
         _securityPolicy = [JSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        
+        _timeoutInterval = 10;
+        
+        _cachePolicy = NSURLRequestUseProtocolCachePolicy;
     }
+}
+
++(void)updateCachePolicy:(NSURLRequestCachePolicy)cachePolicy
+{
+    _cachePolicy = cachePolicy;
+}
+
++(NSURLRequestCachePolicy)getCachePolicy
+{
+    return _cachePolicy;
 }
 
 +(void)updateSecurityPolicy:(JSecurityPolicy *)securityPolicy
@@ -77,6 +94,16 @@ JSecurityPolicy *_securityPolicy;
 +(NSDictionary *)getHeader
 {
     return _header;
+}
+
++(void)updateTimeoutInterval:(float)timeoutInterval
+{
+    _timeoutInterval = timeoutInterval;
+}
+
++(float)getTimeoutInterval
+{
+    return _timeoutInterval;
 }
 
 @end
