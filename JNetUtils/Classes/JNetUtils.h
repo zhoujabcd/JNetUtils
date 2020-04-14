@@ -54,6 +54,8 @@ static JNetConfiguration *jConfig = nil;
 
 -(instancetype)updateTimeoutInterval:(float)time;
 
+-(instancetype)updateCahePolicy:(NSURLRequestCachePolicy)cachePolicy;
+
 -(void)requestData:( void(^ _Nullable )(NSProgress  * _Nullable uploadProgress))uploadProgress downloadProgress:(void(^ _Nullable )(NSProgress  * _Nullable downloadProgress))downloadProgress completionHandler:(void (^)(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error))completionHandler;
 
 @end
