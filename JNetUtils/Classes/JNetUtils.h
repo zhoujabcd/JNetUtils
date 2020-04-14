@@ -14,8 +14,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static JNetConfiguration *jConfig = nil;
-
 @interface JNetUtils : NSObject
 
 @property(nonatomic, strong)NSURLSessionConfiguration *configuration;
